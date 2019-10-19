@@ -1,0 +1,23 @@
+#!/usr/bin/env python
+from Chamak.Foundation.bootstrap import Bootstrap
+from Chamak.Foundation.app import Application
+from Chamak.Foundation.Response import Response
+from werkzeug.wsgi import SharedDataMiddleware
+from werkzeug.wrappers import Request, Response
+from werkzeug.exceptions import HTTPException, NotFound
+import os.path
+import os
+
+
+class Server(object):
+    def wsgi_app(self, environ, start_response):
+        request = Request(environ)
+        return Bootstrap(environ, start_response).run()
+
+    def __call__(self, environ, start_response):
+        return self.wsgi_app(environ, start_response)
+
+if __name__ == '__main__':
+    from werkzeug.serving import run_simple
+    app = Server()
+    run_simple('127.0.0.1', 5000, app, use_debugger=True,static_files=[{"/","public"}], use_reloader=True)
