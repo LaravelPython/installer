@@ -1,3 +1,4 @@
+.vscode/
 larapy-master/
 larapy-installer.egg-info/
 Pipfile.lock
