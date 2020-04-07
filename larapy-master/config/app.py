@@ -1,4 +1,0 @@
-config = {
-    'baseurl': '',
-    'basePath': '/path'
-}
